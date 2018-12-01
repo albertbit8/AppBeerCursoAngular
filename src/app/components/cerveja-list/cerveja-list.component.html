@@ -1,0 +1,66 @@
+<div class="card">
+  <div class="card-header">
+    {{ pageTitle }} {{ totalCervejas }}
+  </div>
+  
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-2">Filtrar cerveja: </div>
+      <div class="col-md-4">
+        <input type="text" [(ngModel)]='listFilter' />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <h4>Filtrando por: {{ listFilter }}</h4>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">    
+    <table class="table table-striped" *ngIf='cervejas.length > 0 ; else notTable'>
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Familia</th>
+          <th scope="col">Litragem (ml)</th>
+          <th scope="col">preço (R$)</th>
+          <th scope="col">Data criacao</th>
+          <th scope="col">
+            <button (click)='showImages()' type="button" class="btn btn-primary">{{ showImage ? 'Hide' : 'Show' }}  Image</button>
+          </th>
+          <th scope="col">ranking</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cerveja of cervejas | filtroProcura: listFilter ">
+          <th scope="row">{{ cerveja.id }}</th>
+          <td>{{ cerveja.nome }}</td>
+          <td>{{ cerveja.familia | lowercase }}</td>
+          <td>{{ cerveja.litragem }}</td>
+          <td>{{ cerveja.preco | currency:'BRL':true:'1.2-2' | spaceCurrency }}</td>
+          <td>{{ cerveja.data }}</td>
+          <th> 
+            <img *ngIf='showImage' [src]='cerveja.foto' [title]='cerveja.nome'/> 
+          </th>
+          <td>
+            <app-star [rating]='cerveja.ranking' (notify)='onNotify($event)'></app-star>
+          </td>
+          <th>
+            <a [routerLink]="['/cervejas/detalhes/', cerveja.id]" >Detalhes</a>
+          </th>
+        </tr>        
+      </tbody>
+    </table>
+
+    <ng-template #notTable>
+      Sem registros
+    </ng-template>
+
+  </div>
+</div>
