@@ -24,8 +24,17 @@ export class CervejasApiService {
 
   postCerveja(cerveja: any) {
     console.log(cerveja)
-    return this.http.post(this.cervejaUrl, cerveja).subscribe(dados => console.log(dados))
+    return this.http.post(this.cervejaUrl, cerveja)
   }
 
+  putCerveja(cerveja: any) {
+    console.log(cerveja)
+    return this.http.put(this.cervejaUrl + `/${cerveja.id}` , cerveja)
+  }
+
+  deleteCerveja(id: number) {
+    console.log("deletando cerveja ", id)
+    return this.http.delete(this.cervejaUrl + `/${id}`)
+  }
 
 }

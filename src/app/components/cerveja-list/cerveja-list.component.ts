@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ICerveja } from 'src/models/cerveja';
 import { Pipe } from '@angular/core'
 import { CervejasApiService } from '../../services/cervejas-api.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-cerveja-list',
@@ -24,7 +25,10 @@ export class CervejaListComponent implements OnInit {
 
   showImage: boolean = false
 
-  constructor(private cervejaService: CervejasApiService) { 
+  constructor(
+    private cervejaService: CervejasApiService,
+    private toastr: ToastrService
+  ) { 
     
   }
 
@@ -46,4 +50,15 @@ export class CervejaListComponent implements OnInit {
     this.showImage = !this.showImage
   }
 
+  deleteBeer(id: number) {
+    this.cervejaService.deleteCerveja(id).subscribe(data => {
+      this.toastr.success('Cerveja Deletada');
+      this.cervejaService.getCervejas()
+        .subscribe(data => {
+          console.log(data)
+          this.cervejas = data,
+            this.totalCervejas = this.cervejas.length
+        })
+    })
+  }
 }

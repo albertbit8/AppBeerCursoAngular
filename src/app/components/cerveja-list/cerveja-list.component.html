@@ -35,6 +35,7 @@
           </th>
           <th scope="col">ranking</th>
           <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -53,6 +54,12 @@
           </td>
           <th>
             <a [routerLink]="['/cervejas/detalhes/', cerveja.id]" >Detalhes</a>
+          </th>
+          <th>
+            <a [routerLink]="['/cervejas/editar/', cerveja.id]">Editar</a>
+          </th>
+          <th>
+            <a [routerLink]="['/cervejas']" (click)="deleteBeer(cerveja.id)">Deletar</a>
           </th>
         </tr>        
       </tbody>

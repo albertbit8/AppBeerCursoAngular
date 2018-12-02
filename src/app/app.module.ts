@@ -43,6 +43,7 @@ import { ToastrModule } from 'ngx-toastr';
       { path: 'cervejas/template/incluir', component: CervejaFormTemplateComponent },
       { path: 'cervejas/data/incluir', component: CervejaFormDataComponent },
       { path: 'cervejas/detalhes/:id', component: CervejaDetalhesComponent },
+      { path: 'cervejas/editar/:id', component: CervejaEditComponent },
       { path: '', redirectTo: 'welcome', pathMatch: 'full' },
       { path: '**', redirectTo: 'welcome', pathMatch: 'full' }
     ]),

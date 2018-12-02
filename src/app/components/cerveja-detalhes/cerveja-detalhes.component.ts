@@ -31,7 +31,7 @@ export class CervejaDetalhesComponent implements OnInit {
 
   ngOnInit() {
       this.cervejaService.getCerveja(parseInt(this.route.snapshot.paramMap.get('id')))
-        .subscribe(data => {          
+        .subscribe(data => {        
           this.cerveja = data
         })
   }
